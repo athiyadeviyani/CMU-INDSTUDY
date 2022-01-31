@@ -1,0 +1,4 @@
+export ESTDIR=/Users/athiyadeviyani/CMU-INDSTUDY/build/speech_tools
+export FLITEDIR=/Users/athiyadeviyani/CMU-INDSTUDY/build/flite
+export FESTVOXDIR=/Users/athiyadeviyani/CMU-INDSTUDY/build/festvox
+export SPTKDIR=/Users/athiyadeviyani/CMU-INDSTUDY/build/SPTK
