@@ -1,5 +1,5 @@
-0 P - s 0 0 0 0 l - E + 0 2 s 1 - 0 0 0.11000013 114.375 114.79166 113.95833 0 coda coda onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
-1 P - s 0 0 0 0 l - S - f 0 0 0 0 a - 0.11000013 116.47059 116.76471 116.17647 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
-2 P - s 0 0 0 0 l - S - f 0 0 0 0 a - 0.11000013 116.37682 116.66666 116.08695 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
-3 P - s 0 0 0 0 l - D - s 0 0 0 0 a + 0.11000013 115 115.4 114.6 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
-4 P - s 0 0 0 0 l - T - s 0 0 0 0 a - 0.10999966 116.48276 116.75862 116.20689 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
+0 P - s 0 0 0 0 l - E + 0 2 s 1 - 0 0 0.085000038 115.33144 115.57765 115.07575 0 coda coda onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
+1 P - s 0 0 0 0 l - S - f 0 0 0 0 a - 0.085000038 119.71257 119.87299 119.48529 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
+2 P - s 0 0 0 0 l - S - f 0 0 0 0 a - 0.074999809 118.86034 119.01186 118.64954 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
+3 P - s 0 0 0 0 l - D - s 0 0 0 0 a + 0.065000057 116.5 116.65454 116.19091 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
+4 P - s 0 0 0 0 l - T - s 0 0 0 0 a - 0.06000042 118.62696 118.77743 118.45141 0 coda onset onset 0 1 0 1 1 0 final M - n 0 0 0 0 l + 0 0 content content content 
