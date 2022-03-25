@@ -3,23 +3,31 @@ import pandas as pd
 import string
 import os
 from playsound import playsound
+import sys
 
+# Read number mapping from CSV
 mapping = pd.read_csv("numbermap.csv", header=None, index_col=0, squeeze=True).to_dict()
 mapping[''] = ''
 mapping['%'] = 'percent'
 
-tens = {
-# '100': 'hundred',
- '': '',
- '1000': 'thousand',
-#  '10000': 'ten thousand',
-#  '100000': 'hundred thousand',
- '1000000': 'million',
-#  '10000000': 'ten million',
-#  '100000000': 'hundred million',
- '1000000000': 'billion'}
+tens_keys = ['', '1000', '1000000', '1000000000']
+tens = {}
+for key in tens_keys:
+    tens[key] = mapping[key]
 
-tens_keys = list(tens.keys())
+# tens = {
+# # '100': 'hundred',
+#  '': '',
+#  '1000': 'thousand',
+# #  '10000': 'ten thousand',
+# #  '100000': 'hundred thousand',
+#  '1000000': 'million',
+# #  '10000000': 'ten million',
+# #  '100000000': 'hundred million',
+#  '1000000000': 'billion'}
+
+# tens_keys = list(tens.keys())
+# print(tens)
 
 def read_whole_number(string):
     rev = string[::-1]
@@ -120,13 +128,19 @@ def process_text(s):
 # for _ in range(10):
 #     n = np.random.randint(1500, 2100)
 #     print(n, process_final(str(n)))
+if len(sys.argv) > 1:
+    text = sys.argv[1]
 
-text = 'Athiya Deviyani is 22 years old and is born in May 3 1999. \n\
-    Her phone number is +14127730373. \n\
-    She lives in 4500 Centre Avenue, P.A. 15213. \n\
-    She is 160.5 centimeters tall. \n\
-    Her phone battery is at 90%. \n\
-    She would like $11.95 to buy dinner at 19:35. \n' 
+else:
+    text = 'Athiya Deviyani is 22 years old and is born in May 3 1999. \n\
+        Her phone number is +14127730373. \n\
+        She lives in 4500 Centre Avenue, P.A. 15213. \n\
+        She is 160.5 centimeters tall. \n\
+        Her phone battery is at 90%. \n\
+        She would like $11.95 to buy dinner at 19:35. \n' 
+
+# text = 'dua ratus lima puluh enam'
+
 print('Original text:', text)
 processed_text = ''.join([s.replace('\n', '...\n') for s in process_text(text)])
 print('Processed text:', processed_text)
