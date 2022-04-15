@@ -5,15 +5,45 @@ import os
 from playsound import playsound
 import sys
 
-# Read number mapping from CSV
-mapping = pd.read_csv("numbermap.csv", header=None, index_col=0, squeeze=True).to_dict()
-mapping[''] = ''
-mapping['%'] = 'percent'
 
-tens_keys = ['', '1000', '1000000', '1000000000']
+mapping = None
 tens = {}
+
+mapping = pd.read_csv("numbermap.csv", header=None, index_col=0, squeeze=True).to_dict()
+# mapping = mapping.to_dict()
+# mapping = mapping[1]
+mapping[''] = ''
+# mapping['%'] = 'percent'
+
+tens_keys = ['', 'thousand', 'million', 'billion']
+# tens = {}
 for key in tens_keys:
     tens[key] = mapping[key]
+
+def set_mapping(df):
+# Read number mapping from CSV
+    # mapping = pd.read_csv(filename, header=None, index_col=0, squeeze=True).to_dict()
+    # mapping = mapping.to_dict()
+    # mapping = mapping[1]
+    # mapping[''] = ''
+    # # mapping['%'] = 'percent'
+    # print(mapping)
+    # print(df)
+
+    mapping = {}
+    
+    for i, row in df.iterrows():
+        mapping[row.digit] = row.word
+
+    mapping[''] = ''
+
+    print(mapping)
+    tens_keys = ['', 'thousand', 'million', 'billion']
+    # tens = {}
+    for key in tens_keys:
+        tens[key] = mapping[key]
+
+    return mapping, tens
 
 # tens = {
 # # '100': 'hundred',
@@ -63,9 +93,9 @@ def process_chunk(string):
         hundred_string = hundreds
         tens = str(int(string[1:]))
         if tens == '0':
-            return mapping[hundred_string] + ' ' + mapping['100']
+            return mapping[hundred_string] + ' ' + mapping['hundred']
         else:
-            return mapping[hundred_string] + ' ' + mapping['100'] + ' ' + mapping[tens]
+            return mapping[hundred_string] + ' ' + mapping['hundred'] + ' ' + mapping[tens]
     
 
 def read_all(string):
@@ -124,33 +154,33 @@ def process_text(s):
             sentence.append(token)
     return ' '.join(sentence)
 
-# Test year
-# for _ in range(10):
-#     n = np.random.randint(1500, 2100)
-#     print(n, process_final(str(n)))
-if len(sys.argv) > 1:
-    text = sys.argv[1]
+# # Test year
+# # for _ in range(10):
+# #     n = np.random.randint(1500, 2100)
+# #     print(n, process_final(str(n)))
+# if len(sys.argv) > 1:
+#     text = sys.argv[1]
 
-else:
-    text = 'Athiya Deviyani is 22 years old and is born in May 3 1999. \n\
-        Her phone number is +14127730373. \n\
-        She lives in 4500 Centre Avenue, P.A. 15213. \n\
-        She is 160.5 centimeters tall. \n\
-        Her phone battery is at 90%. \n\
-        She would like $11.95 to buy dinner at 19:35. \n' 
+# else:
+#     text = 'Athiya Deviyani is 22 years old and is born in May 3 1999. \n\
+#         Her phone number is +14127730373. \n\
+#         She lives in 4500 Centre Avenue, P.A. 15213. \n\
+#         She is 160.5 centimeters tall. \n\
+#         Her phone battery is at 90%. \n\
+#         She would like $11.95 to buy dinner at 19:35. \n' 
 
-# text = 'dua ratus lima puluh enam'
+# # text = 'dua ratus lima puluh enam'
 
-print('Original text:', text)
-processed_text = ''.join([s.replace('\n', '...\n') for s in process_text(text)])
-print('Processed text:', processed_text)
-syscall = "flite/bin/flite \"" + processed_text + "\" tia.wav"
+# print('Original text:', text)
+# processed_text = ''.join([s.replace('\n', '...\n') for s in process_text(text)])
+# print('Processed text:', processed_text)
+# syscall = "flite/bin/flite \"" + processed_text + "\" tia.wav"
 
-os.system(syscall)
+# os.system(syscall)
 
-# filename = 'tia.wav'
-# wave_obj = sa.WaveObject.from_wave_file(filename)
-# play_obj = wave_obj.play()
-# play_obj.wait_done()  # Wait until sound has finished playing
+# # filename = 'tia.wav'
+# # wave_obj = sa.WaveObject.from_wave_file(filename)
+# # play_obj = wave_obj.play()
+# # play_obj.wait_done()  # Wait until sound has finished playing
 
-playsound("tia.wav")
+# playsound("tia.wav")
