@@ -108,7 +108,7 @@ class NumberReader:
 
     def process_text(self, s):
         tokens = s.split(' ')
-        tokens = [token for token in tokens if token not in string.punctuation]
+        # tokens = [token for token in tokens if token not in string.punctuation]
         sentence = []
         for token in tokens:
             if any(i.isdigit() for i in token):
