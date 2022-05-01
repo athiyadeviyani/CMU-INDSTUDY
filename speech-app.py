@@ -52,7 +52,7 @@ Please fill and upload a CSV file.
 def get_table_download_link_csv(df):
     csv = df.to_csv().encode()
     b64 = base64.b64encode(csv).decode()
-    href = f'You can download the template <a href="data:file/csv;base64,{b64}" download="numbermap.csv" target="_blank">here</a>. Please add an additional column that maps a digit with its word-form.'
+    href = 'You can download the template <a href="data:file/csv;base64,{b64}" download="numbermap.csv" target="_blank">here</a>. Please add an additional column that maps a digit with its word-form.'
     return href
 
 numbermap_template = pd.read_csv("numbermap_template.csv")
