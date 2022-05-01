@@ -96,7 +96,7 @@ class NumberReader:
             return self.mapping['+'] + ' ' + self.read_all(string[1:])
         elif '%' in string:
             return self.read_number(string[:-1]) + ' ' + self.mapping['%']
-        elif len(string) > 4:
+        elif len(string) > 10:
             return self.read_all(string)
         else:
             return self.read_whole_number(string)
