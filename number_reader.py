@@ -1,4 +1,5 @@
 import string
+from typing import Mapping
 
 class NumberReader:
 
@@ -66,6 +67,7 @@ class NumberReader:
     
 
     def read_number(self, string):
+        # print(string)
         if string.isnumeric() and 1500 < int(string) < 2100:
             if string[1:-1] == '00':
                 return self.read_whole_number(string)
@@ -77,7 +79,7 @@ class NumberReader:
                 else:
                     return self.read_whole_number(string[:2]) + self.read_whole_number(string[2:])
         elif self.mapping['currency_symbol'] in string:
-            return self.read_number(string[1:]) + ' ' + self.mapping['currency'] + 's'
+            return self.read_number(string[len(self.mapping['currency_symbol']):]) + ' ' + self.mapping['currency']
         elif '.' in string:
             if string[-1] == '.':
                 return self.read_number(string[:-1])
@@ -111,7 +113,7 @@ class NumberReader:
         # tokens = [token for token in tokens if token not in string.punctuation]
         sentence = []
         for token in tokens:
-            if any(i.isdigit() for i in token):
+            if any(i.isdigit() for i in token) or token in self.mapping:
                 sentence.append(self.process_final(token))
             else:
                 sentence.append(token)
