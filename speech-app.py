@@ -81,47 +81,47 @@ if uploaded_file is not None:
         save_uploadedfile(uploaded_file, filename)
         saved = True
 
-st.write("""
-## Read out number
+    st.write("""
+    ## Read out number
 
-Please type a numeric string to be read-out. The numbers can be a combination of any of the following formats:
- - whole numbers: 1235523
- - phone numbers: +4120987654
- - currency: $23
- - floating-point numbers: 21.25
- - time: 19:10
- - percentage: 90%
-""")
+    Please type a numeric string to be read-out. The numbers can be a combination of any of the following formats:
+    - whole numbers: 1235523
+    - phone numbers: +4120987654
+    - currency: $23
+    - floating-point numbers: 21.25
+    - time: 19:10
+    - percentage: 90%
+    """)
 
-number = st.text_input("Please type your number here and hit ENTER or RETURN", value="")
+    number = st.text_input("Please type your number here and hit ENTER or RETURN", value="")
 
-if number != "":
-    #print('Original text:', number)
-    processed_text = ''.join([s.replace('\n', '...\n') for s in number_reader.process_text(number)])
-    
-    #print('Processed text:', processed_text)
-    st.write("Original text: {}".format(number))
-    st.write("Processed text: {}".format(processed_text))
+    if number != "":
+        #print('Original text:', number)
+        processed_text = ''.join([s.replace('\n', '...\n') for s in number_reader.process_text(number)])
+        
+        #print('Processed text:', processed_text)
+        st.write("Original text: {}".format(number))
+        st.write("Processed text: {}".format(processed_text))
 
-    if os.getcwd() == LOCAL_DIR:
-        syscall = "flite/bin/flite \"" + processed_text + "\" test.wav"
-        os.system(syscall)
+        if os.getcwd() == LOCAL_DIR:
+            syscall = "flite/bin/flite \"" + processed_text + "\" test.wav"
+            os.system(syscall)
 
-        audio_file = open('test.wav', 'rb')
-        audio_bytes = audio_file.read()
+            audio_file = open('test.wav', 'rb')
+            audio_bytes = audio_file.read()
 
-        st.audio(audio_bytes, format="audio/wav", start_time=0)
+            st.audio(audio_bytes, format="audio/wav", start_time=0)
 
-    # Located on server
-    else:
-        voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
-        syscall = "flite/bin/flite \"" + processed_text + "\" -voice " + voice_dir + " test.wav"
-        os.system(syscall)
+        # Located on server
+        else:
+            voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
+            syscall = "flite/bin/flite \"" + processed_text + "\" -voice " + voice_dir + " test.wav"
+            os.system(syscall)
 
-        audio_file = open('test.wav', 'rb')
-        audio_bytes = audio_file.read()
+            audio_file = open('test.wav', 'rb')
+            audio_bytes = audio_file.read()
 
-        st.audio(audio_bytes, format="audio/wav", start_time=0)
+            st.audio(audio_bytes, format="audio/wav", start_time=0)
     
     
     # "-voice /~" to the flitevox
