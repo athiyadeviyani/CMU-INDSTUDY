@@ -67,6 +67,8 @@ def save_uploadedfile(uploadedfile, filename):
 
 mapping, tens = None, None
 uploaded_file = st.file_uploader("Choose a file")
+number_reader = None
+
 if uploaded_file is not None:
     dataframe = pd.read_csv(uploaded_file)
     number_reader = NumberReader(dataframe)

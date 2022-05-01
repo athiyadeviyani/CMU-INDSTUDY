@@ -38,7 +38,8 @@ def get_language_df():
         df = pd.DataFrame(list(all_lines.values()), columns=columns)
         return df
 
-# df = get_language_df()
+df = get_language_df()
+df.to_csv("language_df.csv")
 # print(df)
 
 # LANGID TLC WIKI START LAT LONG #utt0 MCD0 #utt1 MCD1 Dur MCDB MCDR NAME
