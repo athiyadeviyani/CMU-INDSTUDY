@@ -1,4 +1,3 @@
-from lib2to3.refactor import get_all_fix_names
 import streamlit as st
 import pandas as pd 
 import numpy as np
@@ -21,7 +20,6 @@ st.write("""
 
 languages = get_language_df()
 
-# languages = pd.read_csv("languages.csv")
 languages_list = []
 lang_dict = {}
 
@@ -66,7 +64,6 @@ st.write(numbermap_template.head())
 def save_uploadedfile(uploadedfile, filename):
     with open(os.path.join("saved",filename),"wb") as f:
         f.write(uploadedfile.getbuffer())
-    #  return st.success("Saved File:{} to saved".format(uploadedfile.name))
 
 mapping, tens = None, None
 uploaded_file = st.file_uploader("Choose a file")
