@@ -1,8 +1,4 @@
-import pandas as pd
 import string
-import os
-from playsound import playsound
-import sys
 
 class NumberReader:
 
