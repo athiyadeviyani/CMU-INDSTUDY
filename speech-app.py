@@ -46,17 +46,19 @@ else:
 st.write("""
 ## Upload CSV
 
-Please fill and upload a CSV file.
+Please fill and upload a CSV file. You can download the template below. Please add an additional column that maps a digit with its word-form.
 """)
 
-def get_table_download_link_csv(df):
-    csv = df.to_csv().encode()
-    b64 = base64.b64encode(csv).decode()
-    href = 'You can download the template <a href="data:file/csv;base64,{b64}" download="numbermap.csv" target="_blank">here</a>. Please add an additional column that maps a digit with its word-form.'
-    return href
+# def get_table_download_link_csv(df):
+#     csv = df.to_csv().encode()
+#     b64 = base64.b64encode(csv).decode()
+#     href = 'You can download the template <a href="data:file/csv;base64,{b64}" download="numbermap.csv" target="_blank">here</a>. Please add an additional column that maps a digit with its word-form.'
+#     return href
 
 numbermap_template = pd.read_csv("numbermap_template.csv")
-st.markdown(get_table_download_link_csv(numbermap_template), unsafe_allow_html=True)
+# st.markdown(get_table_download_link_csv(numbermap_template), unsafe_allow_html=True)
+# st.write("")
+st.download_button("Download", numbermap_template.to_csv(), "numbermap.csv")
 
 st.write("Below is a preview of the template.")
 st.write(numbermap_template.head())
@@ -122,6 +124,24 @@ if uploaded_file is not None:
             audio_bytes = audio_file.read()
 
             st.audio(audio_bytes, format="audio/wav", start_time=0)
+
+            # edited = st.text_input("If the translation is not correct, please input the corrected sentence below and press ENTER or RETURN.")
+            # voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
+            # syscall = "flite/bin/flite \"" + edited + "\" -voice " + voice_dir + " test.wav"
+            # os.system(syscall)
+
+            # audio_file = open('test.wav', 'rb')
+            # audio_bytes = audio_file.read()
+
+            # st.audio(audio_bytes, format="audio/wav", start_time=0)
+
+            # st.write("Please click submit to add correction.")
+    
+
+
+
+
+        
     
     
     # "-voice /~" to the flitevox
