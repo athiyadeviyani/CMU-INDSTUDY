@@ -47,6 +47,7 @@ st.write("""
 ## Upload CSV
 
 Please fill and upload a CSV file. You can download the template below. Please add an additional column that maps a digit with its word-form.
+
 """)
 
 # def get_table_download_link_csv(df):
