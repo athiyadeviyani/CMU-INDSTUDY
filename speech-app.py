@@ -6,6 +6,7 @@ import os
 import base64
 from number_reader import NumberReader
 from language_list import get_language_df
+import datetime
 
 LOCAL_DIR = "/Users/athiyadeviyani/CMU-INDSTUDY"
 saved = False
@@ -115,6 +116,29 @@ if uploaded_file is not None:
 
             st.audio(audio_bytes, format="audio/wav", start_time=0)
 
+            edited = st.text_input("If the translation is not correct, please input the corrected sentence below and press ENTER or RETURN.", value="",
+                placeholder=processed_text)
+            syscall = "flite/bin/flite \"" + edited + "\" test.wav"
+            os.system(syscall)
+
+            audio_file = open('test.wav', 'rb')
+            audio_bytes = audio_file.read()
+
+            st.audio(audio_bytes, format="audio/wav", start_time=0)
+
+            st.write("Please click submit to add correction.")
+
+            btn = st.button("Submit correction")
+
+            if btn:
+                correction = pd.read_csv("corrections.csv", index_col=False)
+                time = datetime.datetime.now()
+                entry = [time, lang_id, number, processed_text, edited]
+                correction.loc[len(correction.index)] = entry
+                correction.to_csv("corrections.csv", index=False)
+
+                st.write("Correction submitted successfully ☺️")
+
         # Located on server
         else:
             voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
@@ -126,17 +150,30 @@ if uploaded_file is not None:
 
             st.audio(audio_bytes, format="audio/wav", start_time=0)
 
-            # edited = st.text_input("If the translation is not correct, please input the corrected sentence below and press ENTER or RETURN.")
-            # voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
-            # syscall = "flite/bin/flite \"" + edited + "\" -voice " + voice_dir + " test.wav"
-            # os.system(syscall)
+            edited = st.text_input("If the translation is not correct, please input the corrected sentence below and press ENTER or RETURN.", value="", 
+                placeholder=processed_text)
+            voice_dir = "../datasets-CMU_Wilderness/allvoices/{}/voices/{}".format(lang_id, flitevox_code)
+            syscall = "flite/bin/flite \"" + edited + "\" -voice " + voice_dir + " test.wav"
+            os.system(syscall)
 
-            # audio_file = open('test.wav', 'rb')
-            # audio_bytes = audio_file.read()
+            audio_file = open('test.wav', 'rb')
+            audio_bytes = audio_file.read()
 
-            # st.audio(audio_bytes, format="audio/wav", start_time=0)
+            st.audio(audio_bytes, format="audio/wav", start_time=0)
 
-            # st.write("Please click submit to add correction.")
+            st.write("Please click submit to add correction.")
+
+            btn = st.button("Submit correction")
+            
+            if btn:
+                correction = pd.read_csv("corrections.csv", index_col=False)
+                time = datetime.datetime.now()
+                entry = [time, lang_id, number, processed_text, edited]
+                correction.loc[len(correction.index)] = entry
+                correction.to_csv("corrections.csv", index=False)
+
+                st.write("Correction submitted successfully ☺️")
+                
     
 
 
